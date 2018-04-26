@@ -291,3 +291,5 @@ performance_test/media/
 
 .env
 .envs/*
+
+pt_env
