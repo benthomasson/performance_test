@@ -52,6 +52,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    'channels',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -71,6 +72,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'performance_test.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'chat'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -237,3 +239,13 @@ SOCIALACCOUNT_ADAPTER = 'performance_test.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+ASGI_APPLICATION = 'config.settings.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
