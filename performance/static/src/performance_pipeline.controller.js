@@ -21,6 +21,9 @@ var PerformancePipelineController = function($scope, $document, $location, $wind
 
     $scope.socket.onmessage = function (message) {
         console.log(["message", message]);
+        var data = JSON.parse(message.data);
+        console.log(data);
+        $scope.on_CpuUsage(data.message.data[0]);
     };
 
     $scope.socket.onclose = function () {

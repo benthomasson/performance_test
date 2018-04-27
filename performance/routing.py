@@ -5,4 +5,5 @@ from . import consumers
 
 websocket_urlpatterns = [
     url(r'^ws/performance$', consumers.PerformanceConsumer),
+    url(r'^ws/collect$', consumers.CollectionConsumer),
 ]
