@@ -19,5 +19,5 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 
 # Django Channels
-channels
+channels==2.1.3
 channels_redis

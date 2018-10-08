@@ -3,6 +3,7 @@ Base settings to build other settings files upon.
 """
 
 import environ
+from urllib.parse import urlparse
 
 ROOT_DIR = environ.Path(__file__) - 3  # (performance_test/config/settings/base.py - 3 = performance_test/)
 APPS_DIR = ROOT_DIR.path('performance_test')
@@ -241,12 +242,18 @@ SOCIALACCOUNT_ADAPTER = 'performance_test.users.adapters.SocialAccountAdapter'
 # Your stuff...
 # ------------------------------------------------------------------------------
 
+
+REDIS_URL = env('REDIS_URL')
+o = urlparse(REDIS_URL)
+REDIS_HOST = o.hostname
+REDIS_PORT = int(o.port)
+
 ASGI_APPLICATION = 'config.settings.routing.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
+            'hosts': [(REDIS_HOST, REDIS_PORT)]
+        }
+    }
 }
