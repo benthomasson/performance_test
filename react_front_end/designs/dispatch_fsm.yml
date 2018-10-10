@@ -1,0 +1,16 @@
+diagram_uuid: 1ffb01dc-d029-4d31-b20f-e85a7eeaa076
+finite_state_machine_id: 1
+name: dispatch_fsm
+states:
+- id: 2
+  label: Ready
+  x: 352
+  y: 384
+- id: 1
+  label: Start
+  x: 345
+  y: 152
+transitions:
+- from_state: Start
+  label: start
+  to_state: Ready
