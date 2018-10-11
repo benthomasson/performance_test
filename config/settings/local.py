@@ -13,6 +13,8 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "192.168.99.100",
+    "45.79.220.50",
+    "performance-measurement-svg.com",
 ]
 
 # CACHES
