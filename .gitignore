@@ -293,3 +293,6 @@ performance_test/media/
 .envs/*
 
 pt_env
+
+/performance_test/static
+/performance_test/templates
