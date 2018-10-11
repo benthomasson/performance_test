@@ -95,19 +95,25 @@ ApplicationScope.prototype.setState = function (o) {
 ApplicationScope.prototype.update_rotation = function (needle) {
   if (needle.rotation > needle.new_rotation) {
     needle.rotation -= 1;
+    return true;
   }
   if (needle.rotation < needle.new_rotation) {
     needle.rotation += 1;
+    return true;
   }
+  return false;
 };
 
 ApplicationScope.prototype.timer = function () {
-  this.update_rotation(this.cpu);
-  this.update_rotation(this.mem);
   this.setState({
     frameNumber: this.state.frameNumber + 1
   });
-  //this.svgFrame.forceUpdate();
+  var needs_update = false;
+  needs_update = needs_update || this.update_rotation(this.cpu);
+  needs_update = needs_update || this.update_rotation(this.mem);
+  if (needs_update) {
+    this.svgFrame.forceUpdate();
+  }
 };
 
 ApplicationScope.prototype.onUnload = function (e) {
