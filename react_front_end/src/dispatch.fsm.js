@@ -42,7 +42,6 @@ _Ready.prototype.onMessage = function(controller, msg_type, message) {
 };
 
 _Ready.prototype.onCpuUsage = function(controller, msg_type, message) {
-  console.log(message);
   var percent = message.cpu_percent / 100.0;
   controller.scope.cpu.new_rotation = Math.trunc(Math.max(Math.min(1.0, percent), 0.0) * 180);
   if (controller.scope.cpu.history.length > 0) {
@@ -51,10 +50,11 @@ _Ready.prototype.onCpuUsage = function(controller, msg_type, message) {
   }
   controller.scope.cpu.history.push(percent);
   controller.scope.cpu.history = controller.scope.cpu.history.slice(-31);
+  controller.scope.events.history.push(null);
+  controller.scope.events.history = controller.scope.events.history.slice(-31);
 };
 
 _Ready.prototype.onMemUsage = function(controller, msg_type, message) {
-  console.log(message);
   var percent = message.mem_percent / 100.0;
   controller.scope.mem.new_rotation = Math.trunc(Math.max(Math.min(1.0, percent), 0.0) * 180);
   if (controller.scope.mem.history.length > 0) {
@@ -63,4 +63,10 @@ _Ready.prototype.onMemUsage = function(controller, msg_type, message) {
   }
   controller.scope.mem.history.push(percent);
   controller.scope.mem.history = controller.scope.mem.history.slice(-31);
+};
+
+_Ready.prototype.onEvent = function(controller, msg_type, message) {
+  controller.scope.events.history.pop();
+  controller.scope.events.history.push(message);
+  controller.scope.events.history = controller.scope.events.history.slice(-31);
 };

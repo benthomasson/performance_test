@@ -3,6 +3,7 @@ import models from './models';
 import Needle from './Needle';
 import Dial from './Dial';
 import Chart from './Chart';
+import Events from './Events';
 
 
 class SVGFrame extends Component {
@@ -48,7 +49,11 @@ class SVGFrame extends Component {
                history={this.scope.cpu.history}
                history_pairs={this.scope.cpu.history_pairs}
                key2="cpu_chart"/>
-      
+        <Events x={this.scope.frameWidth/4}
+               y={this.scope.frameHeight/4 + 200}
+               history={this.scope.events.history}
+               key2="cpu_chart_events"/>
+
 
         <Needle x={this.scope.frameWidth*3/4}
                 y={this.scope.frameHeight/4}
@@ -60,7 +65,11 @@ class SVGFrame extends Component {
                history={this.scope.mem.history}
                history_pairs={this.scope.mem.history_pairs}
                key2="mem_chart"/>
-      
+        <Events x={this.scope.frameWidth*3/4}
+               y={this.scope.frameHeight/4 + 200}
+               history={this.scope.events.history}
+               key2="mem_chart_events"/>
+
         </svg>
       </div>
     );

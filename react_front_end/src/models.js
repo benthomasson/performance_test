@@ -37,6 +37,7 @@ function ApplicationScope (svgFrame) {
 
   this.cpu = {rotation: 0, new_rotation: 0, history: [], history_pairs: []};
   this.mem = {rotation: 0, new_rotation: 0, history: [], history_pairs: []};
+  this.events = {history: []}
 
 
   this.trace_order_seq = util.natural_numbers(0);

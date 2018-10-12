@@ -4,6 +4,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from performance.models import RawCPU
 import logging
+import random
+
 
 logger = logging.getLogger('peformance_test.consumers')
 
@@ -76,6 +78,17 @@ class CollectionConsumer(AsyncWebsocketConsumer):
                 'message': ['CpuUsage', message]
             }
         )
+
+    async def onEvent(self, message):
+
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'perf_message',
+                'message': ['Event', message]
+            }
+        )
+
 
     async def onMemUsage(self, message):
         self.mem_buffer.append(message)

@@ -5,9 +5,6 @@ import Colors from './style/Colors';
 class Chart extends Component {
   render() {
 
-    console.log(this.props.key2);
-
-
     var chartCircleStyle = {
       stroke: Colors.blue,
       fill: Colors.blue,
