@@ -9,7 +9,7 @@ RUN apk update \
   # Pillow dependencies
   && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
   # CFFI dependencies
-  && apk add libffi-dev openssl-dev py-cffi
+  && apk add libffi-dev py-cffi
 
 RUN addgroup -S django \
     && adduser -S -G django django
@@ -23,6 +23,11 @@ COPY ./compose/production/django/gunicorn.sh /gunicorn.sh
 RUN sed -i 's/\r//' /gunicorn.sh
 RUN chmod +x /gunicorn.sh
 RUN chown django /gunicorn.sh
+
+COPY ./compose/production/django/daphne.sh /daphne.sh
+RUN sed -i 's/\r//' /daphne.sh
+RUN chmod +x /daphne.sh
+RUN chown django /daphne.sh
 
 COPY ./compose/production/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh

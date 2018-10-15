@@ -45,8 +45,8 @@ function ApplicationScope (svgFrame) {
 
   //Connect websocket
   if (!this.disconnected) {
-    console.log( "ws://" + this.websocket_host + "/ws/performance");
-    this.control_socket_url = "ws://" + this.websocket_host + "/ws/performance"
+    console.log( "wss://" + this.websocket_host + "/ws/performance");
+    this.control_socket_url = "wss://" + this.websocket_host + "/ws/performance"
     if (process.env.REACT_APP_REPLAY === 'true') {
       this.control_socket_url = this.control_socket_url + "&replay_id=" + this.replay_id;
     }
