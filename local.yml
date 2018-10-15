@@ -17,9 +17,9 @@ services:
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
-    ports:
-      - "8003:8000"
     command: /start.sh
+    ports:
+      - "8000:8000"
 
   postgres:
     build:
@@ -34,3 +34,15 @@ services:
 
   redis:
     image: redis:3.0
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: performance_test_production_nginx
+    volumes:
+        - ./compose/local/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - django
+    ports:
+      - "0.0.0.0:8003:80"
