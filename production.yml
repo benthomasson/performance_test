@@ -40,7 +40,8 @@ services:
     depends_on:
       - django
     ports:
-      - "0.0.0.0:8003:80"
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
 
   redis:
     image: redis:3.0
